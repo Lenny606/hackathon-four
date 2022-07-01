@@ -3,6 +3,7 @@ import Footer from './Footer';
 import DropDown from './Components/DropDown';
 import NavBar from './Components/NavBar';
 import TopFlights from './Components/TopFlights';
+import Home from './Components/Home';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
@@ -48,6 +49,7 @@ function App() {
                 <main className='main'>
 
                     <Routes>
+                        <Route path='/' element={<Home />} />
                         <Route path='/topflights' element={<TopFlights loading={loading} data={destVLC} />} />
                         <Route path='/flights' element={<DropDown />} />
                     </Routes>
