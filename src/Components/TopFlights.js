@@ -3,7 +3,7 @@ import { DateTime } from 'luxon';
 
 function TopFlights({data , loading}) {
 
-console.log(loading);
+// console.log(loading);
     return (
         <>
         { loading && <Rings

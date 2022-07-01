@@ -1,30 +1,97 @@
+import { useState, useEffect } from 'react';
+import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { Rings } from 'react-loader-spinner';
+import { DateTime } from 'luxon';
+
 function DropDown() {
+
+    const [loading, setLoading] = useState(false)
+
+    const [newDepart, setNewDepart] = useState('MAD');
+    const [newDest, setNewDest] = useState('PRG');
+    const [results, setResults] = useState([]);
+
+
+    const url = `https://api.skypicker.com/flights?fly_from=${newDepart}&fly_to=${newDest}&limit=5&partner=data4youcbp202106`;
+
+    const loadData = async () => {
+
+        try {
+
+            setLoading(true);
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data);
+            setResults(data.data);
+
+
+            //read the data and access them accordingly if one object or array etc...
+            //console.log(data[0].name);
+            // setNewDest(data.data);
+        }
+        catch (err) {
+
+        }
+        finally {
+
+            setLoading(false);
+
+        }
+        console.log(newDest);
+    }
+    console.log(newDepart);
+
+
+    // useEffect(() => {
+    //     loadData();
+
+    //     //add dependancy variable to call function after re-render    
+    // }, []);
+
+
     return (
         <div className="dropdown">
-            <form >
 
-                <select name="firstBox">
-                    <option value="value">To</option>
-                    <option value="value">Valencia</option>
-                    <option value="value">Barcelona</option>
-                    <option value="value">Madrid</option>
-                    <option value="value">Milano</option>
-                    <option value="value">Athens</option>
-                </select>
 
-                <select name="secondBox">
-                    <option value="value">From</option>
-                    <option value="value">Prague</option>
-                    <option value="value">Berlin</option>
-                    <option value="value">Warsaw</option>
-                    <option value="value">Pardubice</option>
-                </select>
+            <select name="fly_from" onChange={(e) => setNewDepart(e.target.value)}>
+                <option >To</option>
+                <option value="VLC" >Valencia</option>
+                <option value="BCN" >Barcelona</option>
+                <option value="MAD" >Madrid</option>
+                <option value="LIN" >Milano</option>
+                <option value="ATH" >Athens</option>
+            </select>
 
-                <button>Find Flights</button>
-                <input type="checkbox" id="checkbox" name="direct-flights" />
-                <label for="checkbox"> Direct Flights Only</label>
 
-            </form>
+            <select name="fly_to" onChange={(e) => setNewDest(e.target.value)}>
+                <option >From</option>
+                <option value="PRG">Prague</option>
+                <option value="BER">Berlin</option>
+                <option value="WAW">Warsaw</option>
+                <option value="PED">Pardubice</option>
+            </select>
+
+            <button onClick={() => loadData()}>Find Flights</button>
+            <input type="checkbox" id="checkbox" name="direct-flights" />
+            <label htmlFor="checkbox"> Direct Flights Only</label>
+
+            {loading && <Rings
+                height="100"
+                width="100"
+                color='blue'
+                ariaLabel='loading'
+            />}
+
+            {results.map((destination, index) => {
+                return <div key={index} className='destination destination__vlc'>
+
+                    <p>Departure {destination.cityFrom}: {DateTime.fromMillis(destination.dTimeUTC * 1000).toFormat('HH:mm')} -     Arrival {destination.cityTo}: {DateTime.fromMillis(destination.aTimeUTC * 1000).toFormat('HH:mm')}</p>
+                    <p>Duration: {destination.fly_duration}</p>
+                    <p>Price: {destination.price} EUR</p>
+
+                </div>
+            })}
+
         </div>
     )
 }

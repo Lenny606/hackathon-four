@@ -20,11 +20,7 @@ function App() {
             setLoading(true);
             const response = await fetch(url);
             const data = await response.json();
-            console.log(data);
-
-
-            //read the data and access them accordingly if one object or array etc...
-            //console.log(data[0].name);
+            
             setDestVLC(data.data);
         }
         catch (err) {
@@ -52,9 +48,9 @@ function App() {
 
                 <Routes>
                     <Route path='/topflights' element={<TopFlights loading={loading} data={destVLC} />} />
-                    {/* <Route path='/search/:name' element={<Search />} /> */}
+                    <Route path='/flights' element={<DropDown />} />
                 </Routes>
-                <DropDown />
+                
                 <Footer />
 
 
