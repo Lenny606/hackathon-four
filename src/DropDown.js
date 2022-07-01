@@ -20,6 +20,8 @@ function DropDown() {
                     <option value="value">Pardubice</option>
                 </select>
 
+                <button>Find Flights</button>
+
             </form>
         </div>
     )
