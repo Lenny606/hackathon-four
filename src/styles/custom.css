@@ -11,7 +11,14 @@
 .country, .search {
     text-align: center;
     color: blue;
+}
 
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: blue;
 }
 
 img {
