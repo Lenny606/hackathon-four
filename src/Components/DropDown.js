@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 import { Rings } from 'react-loader-spinner';
 import { DateTime } from 'luxon';
+import AirplaneSymbol from './img/AirplaneSymbol.svg';
 
 function DropDown() {
 
@@ -59,32 +60,36 @@ function DropDown() {
         <div className="dropdown">
 
 
-            <select name="fly_from" onChange={(e) => setNewDepart(e.target.value)}>
-                <option >To</option>
-                <option value="VLC" >Valencia</option>
-                <option value="BCN" >Barcelona</option>
-                <option value="MAD" >Madrid</option>
-                <option value="LIN" >Milano</option>
-                <option value="ATH" >Athens</option>
-            </select>
+            <div className="dropdown__menu">
+                <select name="fly_from" onChange={(e) => setNewDepart(e.target.value)}>
+                    <option >To</option>
+                    <option value="VLC" >Valencia</option>
+                    <option value="BCN" >Barcelona</option>
+                    <option value="MAD" >Madrid</option>
+                    <option value="LIN" >Milano</option>
+                    <option value="ATH" >Athens</option>
+                </select>
 
 
-            <select name="fly_to" onChange={(e) => setNewDest(e.target.value)}>
-                <option >From</option>
-                <option value="PRG">Prague</option>
-                <option value="BER">Berlin</option>
-                <option value="WAW">Warsaw</option>
-                <option value="PED">Pardubice</option>
-            </select>
+                <select name="fly_to" onChange={(e) => setNewDest(e.target.value)}>
+                    <option >From</option>
+                    <option value="PRG">Prague</option>
+                    <option value="BER">Berlin</option>
+                    <option value="WAW">Warsaw</option>
+                    <option value="PED">Pardubice</option>
+                </select>
 
-            <button onClick={() => loadData()}>Find Flights</button>
-            <input type="checkbox" id="checkbox" name="direct-flights" onChange={(e) =>(setStopover(e.target.checked))}/>
-            <label htmlFor="checkbox"> Direct Flights Only</label>
+                <button onClick={() => loadData()}>Find Flights</button>
+                <div className="check">
+                    <input type="checkbox" id="checkbox" name="direct-flights" />
+                    <label htmlFor="checkbox"> Direct Flights Only</label>
+                </div>
+            </div>
 
             {loading && <Rings
                 height="100"
                 width="100"
-                color='blue'
+                color='#19a991'
                 ariaLabel='loading'
             />}
              
@@ -96,6 +101,8 @@ function DropDown() {
                 return  <div key={index} className='destination destination__vlc'>
 
                     <p>Departure: {destination.cityFrom}: {DateTime.fromMillis(destination.dTimeUTC * 1000).toFormat('DD HH:mm')} -  Arrival: {destination.cityTo}: {DateTime.fromMillis(destination.aTimeUTC * 1000).toFormat('DD HH:mm')}</p>
+                    <img className="airplane" src={AirplaneSymbol} />
+                    <p>Departure: <strong>{destination.cityFrom}</strong>: {DateTime.fromMillis(destination.dTimeUTC * 1000).toFormat('DD HH:mm')} - Arrival: <strong>{destination.cityTo}</strong>: {DateTime.fromMillis(destination.aTimeUTC * 1000).toFormat('DD HH:mm')}</p>
                     <p>Duration: {destination.fly_duration}</p>
                     <p>Price: {destination.price} EUR</p>
 
