@@ -49,16 +49,15 @@ function App() {
                 <nav className='navigation' >
                     <NavBar />
                 </nav>
+                <main className='main'>
+                    <Routes>
+                        <Route path='/topflights' element={<TopFlights loading={loading} data={destVLC} />} />
+                        {/* <Route path='/search/:name' element={<Search />} /> */}
+                    </Routes>
 
-                <Routes>
-                    <Route path='/topflights' element={<TopFlights loading={loading} data={destVLC} />} />
-                    {/* <Route path='/search/:name' element={<Search />} /> */}
-                </Routes>
-                <DropDown />
+                    <DropDown />
+                </main>
                 <Footer />
-
-
-
             </BrowserRouter>
         </>
     );
