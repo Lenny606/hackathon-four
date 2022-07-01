@@ -1,3 +1,8 @@
+html {
+    box-sizing: border-box;
+    position: relative;
+}
+
 .navigation {
     display: flex;
     justify-content: space-around;
@@ -45,7 +50,7 @@ img {
     justify-content: center;
     background-color: white;
     color: black;
-    position: absolute;
+    
     bottom: 0;
     width: 100%;
 }
