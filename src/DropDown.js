@@ -20,6 +20,10 @@ function DropDown() {
                     <option value="value">Pardubice</option>
                 </select>
 
+                <button>Find Flights</button>
+                <input type="checkbox" id="checkbox" name="direct-flights" />
+                <label for="checkbox"> Direct Flights Only</label>
+
             </form>
         </div>
     )
