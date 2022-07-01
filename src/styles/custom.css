@@ -1,0 +1,17 @@
+.navigation {
+    color: blue;
+    display: flex;
+    justify-content: space-around;
+    border: solid blue;
+}
+
+.country, .search {
+    text-align: center;
+    color: blue;
+
+}
+
+img {
+    width: 25%;
+}
+
