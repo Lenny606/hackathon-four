@@ -83,7 +83,7 @@ function DropDown() {
             {loading && <Rings
                 height="100"
                 width="100"
-                color='blue'
+                color='#19a991'
                 ariaLabel='loading'
             />}
 
