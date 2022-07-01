@@ -7,7 +7,7 @@ function NavBar() {
     return (
         <>
             <Logo />
-            <Link to="/flights">Flights</Link>
+            <Link to="/flights"><strong>Flights</strong></Link>
             {/* <Link to="/search/:name">Search</Link> */}
             <Link to="/topflights"><strong>Top Flights</strong></Link>
             <SearchBar />
