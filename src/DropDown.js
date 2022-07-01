@@ -4,7 +4,7 @@ function DropDown() {
             <form >
 
                 <select name="firstBox">
-                    <option value="value"><strong>To</strong></option>
+                    <option value="value">To</option>
                     <option value="value">Valencia</option>
                     <option value="value">Barcelona</option>
                     <option value="value">Madrid</option>
@@ -13,7 +13,7 @@ function DropDown() {
                 </select>
 
                 <select name="secondBox">
-                    <option value="value"><strong>From</strong></option>
+                    <option value="value">From</option>
                     <option value="value">Prague</option>
                     <option value="value">Berlin</option>
                     <option value="value">Warsaw</option>
@@ -21,6 +21,8 @@ function DropDown() {
                 </select>
 
                 <button>Find Flights</button>
+                <input type="checkbox" id="checkbox" name="direct-flights" />
+                <label for="checkbox"> Direct Flights Only</label>
 
             </form>
         </div>

@@ -21,6 +21,10 @@ a:hover {
     color: blue;
 }
 
+a:visited {
+    text-decoration: none;
+}
+
 img {
     width: 25%;
 }
