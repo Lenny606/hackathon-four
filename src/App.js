@@ -1,64 +1,67 @@
-import logo from './logo.svg';
 import './App.css';
+import Footer from './Footer';
+import DropDown from './DropDown';
 import NavBar from './Components/NavBar';
 import TopFlights from './Components/TopFlights';
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
 function App() {
- 
-  const [state, setState] = useState([]);
-  const [loading, setLoading] = useState(false)
- 
-  const url = '';
 
-  const loadData = async () => {
+    const [state, setState] = useState([]);
+    const [loading, setLoading] = useState(false)
 
-    try {
+    const url = '';
 
-      setLoading(true);
-      const response = await fetch(url);
-      const data = await response.json();
-      console.log(data.message);
+    const loadData = async () => {
+
+        try {
+
+            setLoading(true);
+            const response = await fetch(url);
+            const data = await response.json();
+            console.log(data.message);
 
 
-      //read the data and access them accordingly if one object or array etc...
-      //console.log(data[0].name);
-      setState(data);
+            //read the data and access them accordingly if one object or array etc...
+            //console.log(data[0].name);
+            setState(data);
+        }
+        catch (err) {
+
+        }
+        finally {
+
+            setLoading(false);
+
+        }
+
     }
-    catch (err) {
 
-    }
-    finally {
+    useEffect(() => {
+        loadData();
+        //add dependancy variable to call function after re-render    
+    }, []);
 
-      setLoading(false);
+    return (
+        <>
+            <BrowserRouter>
+                <nav className='navigation' >
+                    <NavBar />
+                </nav>
 
-    }
-
-  }
- 
-  useEffect(() => {
-    loadData();
-    //add dependancy variable to call function after re-render    
-  }, []);
- 
-  return (
-    <>
-    <BrowserRouter>
-      <nav className='navigation' >
-        <NavBar />
-      </nav>
-
-      <Routes>
-        <Route path='/topflights' element={<TopFlights loading={loading} data={state} />} />
-        {/* <Route path='/search/:name' element={<Search />} /> */}
-      </Routes>
+                <Routes>
+                    <Route path='/topflights' element={<TopFlights loading={loading} data={state} />} />
+                    {/* <Route path='/search/:name' element={<Search />} /> */}
+                </Routes>
+                <DropDown />
+                <Footer />
 
 
 
-    </BrowserRouter>
-  </>
-  );
+            </BrowserRouter>
+        </>
+    );
 }
 
 export default App;
