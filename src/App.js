@@ -20,7 +20,7 @@ function App() {
             setLoading(true);
             const response = await fetch(url);
             const data = await response.json();
-            
+
             setDestVLC(data.data);
         }
         catch (err) {
@@ -46,12 +46,12 @@ function App() {
                     <NavBar />
                 </nav>
                 <main className='main'>
+                    <DropDown />
                     <Routes>
                         <Route path='/topflights' element={<TopFlights loading={loading} data={destVLC} />} />
                         {/* <Route path='/search/:name' element={<Search />} /> */}
                     </Routes>
 
-                    <DropDown />
                 </main>
                 <Footer />
             </BrowserRouter>

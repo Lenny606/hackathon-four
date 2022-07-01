@@ -1,6 +1,17 @@
 html {
     box-sizing: border-box;
     position: relative;
+    height: 100%;
+}
+
+body, #root {
+    height: 100%;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .navigation {
@@ -50,8 +61,6 @@ img {
     justify-content: center;
     background-color: white;
     color: black;
-    
-    bottom: 0;
     width: 100%;
 }
 
