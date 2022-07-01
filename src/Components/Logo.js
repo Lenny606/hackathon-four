@@ -1,9 +1,12 @@
+import AirplaneLogo from './img/AirplaneLogo.svg';
+
 function Logo() {
     return (
         <div className="logo">
 
-            <div>@</div>
-            <h2>BrandNameHere</h2>
+
+            <img src={AirplaneLogo} />
+            <h2>Definitely Safe Airlines</h2>
 
         </div>
     )
