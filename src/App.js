@@ -46,10 +46,10 @@ function App() {
                     <NavBar />
                 </nav>
                 <main className='main'>
-                    <DropDown />
+                   
                     <Routes>
                         <Route path='/topflights' element={<TopFlights loading={loading} data={destVLC} />} />
-                       
+                        <Route path='/flights' element={<DropDown />} />
                     </Routes>
 
                 </main>
