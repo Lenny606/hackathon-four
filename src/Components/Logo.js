@@ -2,7 +2,7 @@ function Logo() {
     return (
         <div className="logo">
             <div>@</div>
-            <span>BrandNameHere</span>
+            <h2>BrandNameHere</h2>
         </div>
     )
 }

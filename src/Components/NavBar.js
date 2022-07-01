@@ -9,7 +9,7 @@ function NavBar() {
             <Logo />
             <Link to="/flights">Flights</Link>
             {/* <Link to="/search/:name">Search</Link> */}
-            <Link to="/topflights">Top Flights</Link>
+            <Link to="/topflights"><strong>Top Flights</strong></Link>
             <SearchBar />
         </>
     )
