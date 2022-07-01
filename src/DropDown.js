@@ -72,8 +72,10 @@ function DropDown() {
             </select>
 
             <button onClick={() => loadData()}>Find Flights</button>
-            <input type="checkbox" id="checkbox" name="direct-flights" />
-            <label htmlFor="checkbox"> Direct Flights Only</label>
+            <div className="check">
+                <input type="checkbox" id="checkbox" name="direct-flights" />
+                <label htmlFor="checkbox"> Direct Flights Only</label>
+            </div>
 
             {loading && <Rings
                 height="100"

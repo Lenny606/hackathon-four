@@ -6,6 +6,7 @@ html {
 
 body, #root {
     height: 100%;
+    background-color: #19a991;
 }
 
 #root {
@@ -80,14 +81,28 @@ img {
     justify-content: space-around;
     margin: 2rem;
     width: 60%;
+    background-color: white;
 }
 
 .airplane {
     width: 1.75rem;
 }
 
-html {
-    box-sizing: border-box;
-    position: relative;
+select
+{
+    width: 20%;
+    
+}
+
+.dropdown {
+    display: flex;
+    height: 5.5rem;
+    border-radius: 5px;
+    border: 2px solid lightgray;
+    align-items: center;
+    justify-content: space-around;
+    margin: 2rem;
+    width: 65%;
+    background-color: white;
 }
 
