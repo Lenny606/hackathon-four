@@ -7,23 +7,27 @@ function DropDown() {
 
     const [loading, setLoading] = useState(false)
 
-    const [newDepart, setNewDepart] = useState('MAD');
-    const [newDest, setNewDest] = useState('PRG');
+    const [newDepart, setNewDepart] = useState('PRG');
+    const [newDest, setNewDest] = useState('VLC');
     const [results, setResults] = useState([]);
+    const [stopover, setStopover] = useState(false);
 
 
     const url = `https://api.skypicker.com/flights?fly_from=${newDepart}&fly_to=${newDest}&limit=5&partner=data4youcbp202106`;
+
+    const stopoverUrl = `https://api.skypicker.com/flights?fly_from=${newDepart}&fly_to=${newDest}&limit=5&max_stopovers=0&partner=data4youcbp202106`;
 
     const loadData = async () => {
 
         try {
 
             setLoading(true);
-            const response = await fetch(url);
+            const response = await fetch( stopover ? stopoverUrl : url);
             const data = await response.json();
             console.log(data);
             setResults(data.data);
 
+            console.log(response);
 
             //read the data and access them accordingly if one object or array etc...
             //console.log(data[0].name);
@@ -35,11 +39,12 @@ function DropDown() {
         finally {
 
             setLoading(false);
+     
 
         }
-        console.log(newDest);
+        console.log(stopover);
     }
-    console.log(newDepart);
+    
 
 
     // useEffect(() => {
@@ -50,6 +55,7 @@ function DropDown() {
 
 
     return (
+       
         <div className="dropdown">
 
 
@@ -72,7 +78,7 @@ function DropDown() {
             </select>
 
             <button onClick={() => loadData()}>Find Flights</button>
-            <input type="checkbox" id="checkbox" name="direct-flights" />
+            <input type="checkbox" id="checkbox" name="direct-flights" onChange={(e) =>(setStopover(e.target.checked))}/>
             <label htmlFor="checkbox"> Direct Flights Only</label>
 
             {loading && <Rings
@@ -81,11 +87,15 @@ function DropDown() {
                 color='blue'
                 ariaLabel='loading'
             />}
-
+             
+            
+                             
             {results.map((destination, index) => {
-                return <div key={index} className='destination destination__vlc'>
+                
 
-                    <p>Departure: {destination.cityFrom}: {DateTime.fromMillis(destination.dTimeUTC * 1000).toFormat('DD HH:mm')} -     Arrival: {destination.cityTo}: {DateTime.fromMillis(destination.aTimeUTC * 1000).toFormat('DD HH:mm')}</p>
+                return  <div key={index} className='destination destination__vlc'>
+
+                    <p>Departure: {destination.cityFrom}: {DateTime.fromMillis(destination.dTimeUTC * 1000).toFormat('DD HH:mm')} -  Arrival: {destination.cityTo}: {DateTime.fromMillis(destination.aTimeUTC * 1000).toFormat('DD HH:mm')}</p>
                     <p>Duration: {destination.fly_duration}</p>
                     <p>Price: {destination.price} EUR</p>
 

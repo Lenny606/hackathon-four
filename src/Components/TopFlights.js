@@ -18,6 +18,7 @@ function TopFlights({data , loading}) {
         <p>Departure: {destination.cityFrom}: {DateTime.fromMillis(destination.dTimeUTC * 1000).toFormat('DD HH:mm')} -     Arrival: {destination.cityTo}: {DateTime.fromMillis(destination.aTimeUTC * 1000).toFormat('DD HH:mm')}</p>
         <p>Duration: {destination.fly_duration}</p>
         <p>Price: {destination.price} EUR</p>
+        <p>Flight No: {destination.route[0].flight_no}</p>
                    
          </div>
         })}
