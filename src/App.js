@@ -8,10 +8,10 @@ import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
 
 function App() {
 
-    const [state, setState] = useState([]);
+    const [destVLC, setDestVLC] = useState([]);
     const [loading, setLoading] = useState(false)
 
-    const url = '';
+    const url = 'https://api.skypicker.com/flights?fly_from=PRG&fly_to=VLC&limit=5&partner=data4youcbp202106';
 
     const loadData = async () => {
 
@@ -20,12 +20,12 @@ function App() {
             setLoading(true);
             const response = await fetch(url);
             const data = await response.json();
-            console.log(data.message);
+            console.log(data);
 
 
             //read the data and access them accordingly if one object or array etc...
             //console.log(data[0].name);
-            setState(data);
+            setDestVLC(data.data);
         }
         catch (err) {
 
@@ -51,7 +51,7 @@ function App() {
                 </nav>
 
                 <Routes>
-                    <Route path='/topflights' element={<TopFlights loading={loading} data={state} />} />
+                    <Route path='/topflights' element={<TopFlights loading={loading} data={destVLC} />} />
                     {/* <Route path='/search/:name' element={<Search />} /> */}
                 </Routes>
                 <DropDown />
