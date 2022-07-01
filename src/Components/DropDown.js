@@ -12,6 +12,9 @@ function DropDown() {
     const [newDest, setNewDest] = useState('VLC');
     const [results, setResults] = useState([]);
     const [stopover, setStopover] = useState(false);
+    const [offset, setOffset] = useState(0);
+    const [limit, setLimit] = useState(5);
+    
 
 
     const url = `https://api.skypicker.com/flights?fly_from=${newDepart}&fly_to=${newDest}&limit=5&partner=data4youcbp202106`;
@@ -62,7 +65,7 @@ function DropDown() {
 
             <div className="dropdown__menu">
                 <select name="fly_from" onChange={(e) => setNewDepart(e.target.value)}>
-                    <option >To</option>
+                    <option >From</option>
                     <option value="VLC" >Valencia</option>
                     <option value="BCN" >Barcelona</option>
                     <option value="MAD" >Madrid</option>
@@ -72,7 +75,7 @@ function DropDown() {
 
 
                 <select name="fly_to" onChange={(e) => setNewDest(e.target.value)}>
-                    <option >From</option>
+                    <option >To</option>
                     <option value="PRG">Prague</option>
                     <option value="BER">Berlin</option>
                     <option value="WAW">Warsaw</option>
@@ -81,9 +84,10 @@ function DropDown() {
 
                 <button onClick={() => loadData()}>Find Flights</button>
                 <div className="check">
-                    <input type="checkbox" id="checkbox" name="direct-flights" />
+                    <input type="checkbox" id="checkbox" name="direct-flights" onChange={(e)=>setStopover(e.target.checked)} />
                     <label htmlFor="checkbox"> Direct Flights Only</label>
                 </div>
+               
             </div>
 
             {loading && <Rings
@@ -93,21 +97,25 @@ function DropDown() {
                 ariaLabel='loading'
             />}
              
-            
-                             
-            {results.map((destination, index) => {
+            {!!results.length ? (
+                results.map((destination, index) => {
                 
 
-                return  <div key={index} className='destination destination__vlc'>
-
-                    <p>Departure: {destination.cityFrom}: {DateTime.fromMillis(destination.dTimeUTC * 1000).toFormat('DD HH:mm')} -  Arrival: {destination.cityTo}: {DateTime.fromMillis(destination.aTimeUTC * 1000).toFormat('DD HH:mm')}</p>
-                    <img className="airplane" src={AirplaneSymbol} />
-                    <p>Departure: <strong>{destination.cityFrom}</strong>: {DateTime.fromMillis(destination.dTimeUTC * 1000).toFormat('DD HH:mm')} - Arrival: <strong>{destination.cityTo}</strong>: {DateTime.fromMillis(destination.aTimeUTC * 1000).toFormat('DD HH:mm')}</p>
-                    <p>Duration: {destination.fly_duration}</p>
-                    <p>Price: {destination.price} EUR</p>
-
-                </div>
-            })}
+                    return  <div key={index} className='destination destination__vlc'>
+    
+                       
+                        <img className="airplane" src={AirplaneSymbol} />
+                        <p>Departure: <strong>{destination.cityFrom}</strong>: {DateTime.fromMillis(destination.dTimeUTC * 1000).toFormat('DD HH:mm')} - Arrival: <strong>{destination.cityTo}</strong>: {DateTime.fromMillis(destination.aTimeUTC * 1000).toFormat('DD HH:mm')}</p>
+                        <p>Duration: {destination.fly_duration}</p>
+                        <p>Price: {destination.price} EUR</p>
+    
+                        
+                    </div>
+                })
+                 
+            ) : <p></p>}
+                        
+            {}
 
         </div>
     )
